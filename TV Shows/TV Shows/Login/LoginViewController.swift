@@ -8,43 +8,53 @@
 
 
 import UIKit
-class LoginViewController: UIViewController {
-    var counter = 0
-    var cornerRadius = 75
-    var isAnimating = false
+final class LoginViewController: UIViewController {
+    // MARK: - Properties
+    
+    private var counter: Int = 0
+    private var cornerRadius: Int = 75
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var counterLabel: UILabel!
     @IBOutlet weak var incrementButton: UIButton!
     @IBOutlet weak var decrementButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var changeAnimationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    // MARK: - Lifecycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        counter = 0
+        setupUI()
+        animateSpinner()
+    }
+    
+    func setupUI(){
         cornerRadius = 75
         counterLabel.text = "0"
         incrementButton.layer.cornerRadius = CGFloat(cornerRadius)
         decrementButton.layer.cornerRadius = CGFloat(cornerRadius)
         resetButton.layer.cornerRadius = CGFloat(cornerRadius)
-        
-        startAnimation()
+    }
+    
+    func animateSpinner(){
+        changeAnimation()
         let timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false){
-            timer in self.stopAnimation()
-        }
-        
-    }
-    
-    @IBAction @objc func startAnimation(){
-        if(!isAnimating){
-            activityIndicator.startAnimating()
-            isAnimating = true
+            timer in self.changeAnimation()
         }
     }
     
-    @IBAction @objc func stopAnimation(){
-        if(isAnimating){
+    // MARK: - Actions
+    
+    @IBAction @objc func changeAnimation(){
+        if activityIndicator.isAnimating{
             activityIndicator.stopAnimating()
-            isAnimating = false
+            changeAnimationButton.setTitle("Start", for: .normal)
+        }else{
+            activityIndicator.startAnimating()
+            changeAnimationButton.setTitle("Stop", for: .normal)
         }
     }
     
