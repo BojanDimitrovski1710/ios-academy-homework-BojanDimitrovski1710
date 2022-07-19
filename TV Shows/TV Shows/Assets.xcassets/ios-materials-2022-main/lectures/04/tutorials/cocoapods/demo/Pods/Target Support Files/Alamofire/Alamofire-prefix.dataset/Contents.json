@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "Alamofire-prefix.pch",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

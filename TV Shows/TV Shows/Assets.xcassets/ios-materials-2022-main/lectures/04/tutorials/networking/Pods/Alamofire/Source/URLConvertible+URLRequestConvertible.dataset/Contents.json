@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "URLConvertible+URLRequestConvertible.swift",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

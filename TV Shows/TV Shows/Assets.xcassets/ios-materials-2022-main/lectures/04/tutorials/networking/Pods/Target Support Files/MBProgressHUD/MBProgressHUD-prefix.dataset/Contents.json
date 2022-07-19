@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "MBProgressHUD-prefix.pch",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

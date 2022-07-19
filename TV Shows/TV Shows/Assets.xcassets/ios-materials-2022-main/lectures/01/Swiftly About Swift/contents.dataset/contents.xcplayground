@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='rendered'>
+    <pages>
+        <page name='1. Intro'/>
+        <page name='2. Let vs. Var'/>
+        <page name='3. Optionals'/>
+        <page name='4. Unwrapping'/>
+        <page name='5. Swift Types'/>
+        <page name='6. Initializer (Constructor)'/>
+        <page name='7. Protocols'/>
+    </pages>
+</playground>

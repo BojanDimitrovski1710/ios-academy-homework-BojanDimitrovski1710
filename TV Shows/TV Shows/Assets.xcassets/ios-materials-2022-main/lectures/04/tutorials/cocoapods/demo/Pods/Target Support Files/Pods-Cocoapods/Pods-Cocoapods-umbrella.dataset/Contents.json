@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "Pods-Cocoapods-umbrella.h",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
