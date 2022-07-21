@@ -1,6 +1,0 @@
-framework module Pods_Lecture_4_Demo {
-  umbrella header "Pods-Lecture_4_Demo-umbrella.h"
-
-  export *
-  module * { export * }
-}
