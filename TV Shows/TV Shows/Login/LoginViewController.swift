@@ -143,6 +143,6 @@ final class LoginViewController: UIViewController {
         ShowsViewController.user = user
         ShowsViewController.authInfo = authInfo
         
-        self.navigationController?.pushViewController(ShowsViewController, animated: true)
+        self.navigationController?.setViewControllers([ShowsViewController], animated: true)
     }
 }

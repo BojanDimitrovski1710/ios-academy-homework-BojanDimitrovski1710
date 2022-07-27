@@ -19,13 +19,14 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.text = data[indexPath.row]
         return cell
-        }
+    }
     
     // MARK: - Properties
     
     public var user: User!
     public var authInfo: AuthInfo!
     var data: [String] = []
+    private var shows: [Show]!
     
     // MARK: - Outlets
 
@@ -40,11 +41,12 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
     }
     
     func setupUI(){
-        self.navigationController!.setNavigationBarHidden(true, animated: true)
+        //self.navigationController!.setNavigationBarHidden(true, animated: true)
     }
     
     func getShows(){
         tableView.dataSource = self
+        tableView.delegate = self
         MBProgressHUD.showAdded(to: self.view, animated: true)
         AF.request(
             "https://tv-shows.infinum.academy/shows",
@@ -58,6 +60,7 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
             switch dataResponse.result{
             case .success(let ShowResponse):
                 var shows = ShowResponse.shows
+                self.shows = shows
                 for show in shows{
                     self.data.append(show.title)
                     self.tableView.reloadData()
@@ -75,5 +78,19 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
     // MARK: - Actions
     
     
-    
+}
+
+extension ShowsViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        print("Ping")
+        let NewStoryboard = UIStoryboard(name: "Details", bundle: nil)
+        let DetailsViewController = NewStoryboard.instantiateViewController(withIdentifier: "Details") as! DetailsViewController
+        
+        DetailsViewController.user = user
+        DetailsViewController.authInfo = authInfo
+        DetailsViewController.show = shows[indexPath.row]
+        print(shows[indexPath.row])
+        self.navigationController?.pushViewController(DetailsViewController, animated: true)
+        
+    }
 }

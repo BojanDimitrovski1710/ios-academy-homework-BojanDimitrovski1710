@@ -9,10 +9,10 @@ import Foundation
 struct Show: Decodable{
     let id: String
     let title: String
-    let average_rating: Int
+    let average_rating: Double?
     let description: String
     let no_of_reviews: Int
-    let image_url: String
+    let image_url: String?
 }
 
 struct ShowResponse: Decodable{
