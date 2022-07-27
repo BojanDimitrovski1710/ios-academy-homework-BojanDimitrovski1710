@@ -13,20 +13,6 @@ import MBProgressHUD
 final class LoginViewController: UIViewController {
     // MARK: - Properties
     
-    private var cornerRadius: Int = 75
-    private var rememberUser: Bool = false
-    private var user: UserResponse? = nil
-    
-    // MARK: - Outlets
-    
-    @IBOutlet private weak var loginButton: UIButton!
-    @IBOutlet private weak var rememberMeButton: UIButton!
-    @IBOutlet private weak var emailField: UITextField!
-    @IBOutlet private weak var passwordField: UITextField!
-
-final class LoginViewController: UIViewController {
-    // MARK: - Properties
-    
     private var counter: Int = 0
     private var cornerRadius: Int = 75
     
@@ -63,10 +49,8 @@ final class LoginViewController: UIViewController {
         if !rememberUser{
             emailField.text = nil
             passwordField.text = nil
-        counterLabel.text = "0"
-        incrementButton.layer.cornerRadius = CGFloat(cornerRadius)
-        decrementButton.layer.cornerRadius = CGFloat(cornerRadius)
-        resetButton.layer.cornerRadius = CGFloat(cornerRadius)
+            counterLabel.text = "0"
+        }
     }
     
     func animateSpinner(){
@@ -148,9 +132,9 @@ final class LoginViewController: UIViewController {
                 case .failure(let error):
                     print("Failure: \(error)")
                 }
-            }
-            
+            }  
         }
+    }
     @IBAction @objc func changeAnimation(){
         if activityIndicator.isAnimating{
             activityIndicator.stopAnimating()
