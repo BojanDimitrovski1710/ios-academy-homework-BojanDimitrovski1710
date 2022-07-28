@@ -125,6 +125,9 @@ private extension RatingView {
     func setRating(_ rating: Int) {
         // TODO: Your code goes here
         var index = 0
+        ratingButtons.forEach(){
+            $0.isSelected = false
+        }
         ratingButtons.forEach {
             if index < rating{
                 $0.isSelected = true
