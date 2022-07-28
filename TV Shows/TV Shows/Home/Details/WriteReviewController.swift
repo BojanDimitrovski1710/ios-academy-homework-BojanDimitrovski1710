@@ -18,6 +18,17 @@ class WriteReviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNav()
+    }
+    
+    @objc func dismissReview(){
+        dismiss(animated: true)
+    }
+    
+    func setUpNav(){
+        self.navigationItem.title = "Write a Review"
+        let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissReview))
+        self.navigationItem.leftBarButtonItem = leftButton
     }
 
 }

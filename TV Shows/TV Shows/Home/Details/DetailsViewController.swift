@@ -90,7 +90,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func dismissReview(){
+    @objc func dismissReview(){
         dismiss(animated: true)
     }
     
@@ -102,8 +102,6 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         WriteReviewViewController.show = self.show
         WriteReviewViewController.authInfo = self.authInfo
         let navigationController = UINavigationController(rootViewController: WriteReviewViewController)
-        let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: Selector("dismissReview"))
-        navigationController.navigationItem.leftBarButtonItem = leftButton
         present(navigationController, animated: true)
     }
     
