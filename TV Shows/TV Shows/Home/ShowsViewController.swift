@@ -59,14 +59,14 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
             guard let self = self else { return }
             switch dataResponse.result{
             case .success(let ShowResponse):
-                var shows = ShowResponse.shows
+                let shows = ShowResponse.shows
                 self.shows = shows
                 for show in shows{
                     self.data.append(show.title)
                     self.tableView.reloadData()
                 }
                 break
-            case .failure(let error):
+            case .failure(_):
                     break
             }
             
@@ -82,14 +82,11 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
 
 extension ShowsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        print("Ping")
         let NewStoryboard = UIStoryboard(name: "Details", bundle: nil)
         let DetailsViewController = NewStoryboard.instantiateViewController(withIdentifier: "Details") as! DetailsViewController
-        
         DetailsViewController.user = user
         DetailsViewController.authInfo = authInfo
         DetailsViewController.show = shows[indexPath.row]
-        print(shows[indexPath.row])
         self.navigationController?.pushViewController(DetailsViewController, animated: true)
         
     }

@@ -12,13 +12,15 @@ struct ReviewsResponse: Codable{
 }
 
 struct Review: Codable{
-    let rating: Int
+    let rating: Double?
     let comment: String
     let id: String
+    let user: User
     
     enum CodingKeys: String, CodingKey{
         case rating
         case comment
         case id
+        case user
     }
 }

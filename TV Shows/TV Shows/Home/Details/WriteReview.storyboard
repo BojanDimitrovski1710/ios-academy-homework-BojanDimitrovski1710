@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Write Review View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="WriteReview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="WriteReviewViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="WriteReview" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blp-M5-yE3">
+                                <rect key="frame" x="10" y="170" width="394" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="JLr-mP-MbI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your comment here..." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B01-2A-4pD">
+                                <rect key="frame" x="10" y="228" width="394" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Pf6-jM-CrO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl3-3e-iSn">
+                                <rect key="frame" x="10" y="54" width="394" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="mgc-4D-w8y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKA-46-HjI" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
+                                <rect key="frame" x="10" y="112" width="394" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssi-4T-0Us">
+                                <rect key="frame" x="10" y="571" width="394" height="50"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Submit">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="baseBackgroundColor" red="0.32156862749999998" green="0.17254901959999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="blp-M5-yE3" firstAttribute="leading" secondItem="B01-2A-4pD" secondAttribute="leading" id="0Qz-Eh-Gzz"/>
+                            <constraint firstItem="hl3-3e-iSn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="53X-SQ-aYv"/>
+                            <constraint firstItem="blp-M5-yE3" firstAttribute="trailing" secondItem="B01-2A-4pD" secondAttribute="trailing" id="6N0-Nk-zVP"/>
+                            <constraint firstItem="hl3-3e-iSn" firstAttribute="trailing" secondItem="jKA-46-HjI" secondAttribute="trailing" id="7B9-v8-1Tb"/>
+                            <constraint firstItem="blp-M5-yE3" firstAttribute="top" secondItem="jKA-46-HjI" secondAttribute="bottom" constant="8" id="9Zu-4W-q8o"/>
+                            <constraint firstItem="jKA-46-HjI" firstAttribute="trailing" secondItem="blp-M5-yE3" secondAttribute="trailing" id="A0x-Vk-HhF"/>
+                            <constraint firstItem="ssi-4T-0Us" firstAttribute="top" secondItem="B01-2A-4pD" secondAttribute="bottom" constant="43" id="Czd-qA-Ko7"/>
+                            <constraint firstItem="jKA-46-HjI" firstAttribute="leading" secondItem="blp-M5-yE3" secondAttribute="leading" id="IFc-f9-SzW"/>
+                            <constraint firstItem="ssi-4T-0Us" firstAttribute="trailing" secondItem="B01-2A-4pD" secondAttribute="trailing" id="MCJ-FV-yvR"/>
+                            <constraint firstItem="B01-2A-4pD" firstAttribute="top" secondItem="blp-M5-yE3" secondAttribute="bottom" constant="8" id="WXV-zF-Mfj"/>
+                            <constraint firstItem="hl3-3e-iSn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="dK2-SX-SgO"/>
+                            <constraint firstItem="ssi-4T-0Us" firstAttribute="leading" secondItem="B01-2A-4pD" secondAttribute="leading" id="eqx-vB-gdw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ssi-4T-0Us" secondAttribute="bottom" constant="241" id="gJe-LC-t7X"/>
+                            <constraint firstItem="hl3-3e-iSn" firstAttribute="leading" secondItem="jKA-46-HjI" secondAttribute="leading" id="jtZ-1C-U09"/>
+                            <constraint firstItem="jKA-46-HjI" firstAttribute="top" secondItem="hl3-3e-iSn" secondAttribute="bottom" constant="8" id="m9W-Vf-RrD"/>
+                            <constraint firstItem="hl3-3e-iSn" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nns-4F-YUm"/>
+                            <constraint firstItem="blp-M5-yE3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="170" id="rXd-XG-V2t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="commentField" destination="B01-2A-4pD" id="ZlU-u8-AdZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-13.043478260869566" y="85.714285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

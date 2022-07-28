@@ -32,6 +32,8 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.emailField.text = "newEmail@gmail.com"
+        self.passwordField.text = "mistery123"
     }
     
     func setupUI(){
