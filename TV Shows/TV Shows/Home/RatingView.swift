@@ -143,7 +143,7 @@ private extension RatingView {
             return
         }
         // TODO: Enter the correct index for the rating
-        //setRating(/* correct value */)
+        setRating(buttonIndex)
         delegate?.didChangeRating(rating)
     }
 }

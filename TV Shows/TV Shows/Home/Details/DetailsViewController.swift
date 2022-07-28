@@ -30,6 +30,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             cell.showTitle.text = self.show.title
             cell.showDescription.text = self.show.description
+            cell.reviewDetails.text = String(data.count) + " REVIEWS, " + String(getRatingAverage()) + " AVERAGE"
             return cell
         }
         guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto2", for: indexPath) as? ReviewTableViewCell
@@ -61,6 +62,19 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         getShowInfo()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    func getRatingAverage() -> Double{
+        var score = 0.00
+        for review in data{
+            score += review.rating!
+        }
+        score /= Double(data.count)
+        return score
+    }
+    
     func setupUI(){
         self.navigationController!.setNavigationBarHidden(false, animated: true)
     }
@@ -88,10 +102,6 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
                     break
             }
         }
-    }
-    
-    @objc func dismissReview(){
-        dismiss(animated: true)
     }
     
     // MARK: Actions

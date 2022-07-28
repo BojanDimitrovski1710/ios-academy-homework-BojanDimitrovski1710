@@ -13,7 +13,7 @@ class ShowInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var showTitle: UILabel!
     
     @IBOutlet weak var showDescription: UILabel!
-    
+    @IBOutlet weak var reviewDetails: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

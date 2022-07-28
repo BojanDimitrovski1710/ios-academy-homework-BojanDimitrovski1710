@@ -90,6 +90,7 @@
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" identifier="proto1"/>
                                         <connections>
+                                            <outlet property="reviewDetails" destination="bch-VH-4ew" id="Tay-eh-Lh9"/>
                                             <outlet property="showDescription" destination="yZe-2F-oJj" id="JDE-Ce-jIi"/>
                                             <outlet property="showTitle" destination="feu-i3-SeY" id="bfb-Sd-rVs"/>
                                         </connections>
