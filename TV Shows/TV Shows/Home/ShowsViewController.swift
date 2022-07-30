@@ -8,18 +8,7 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
-final class ShowsViewController: UIViewController, UITableViewDataSource {
-    
-    // MARK: - Table Functions
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = data[indexPath.row]
-        return cell
-    }
+final class ShowsViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -84,5 +73,18 @@ extension ShowsViewController: UITableViewDelegate{
         DetailsViewController.show = shows[indexPath.row]
         self.navigationController?.pushViewController(DetailsViewController, animated: true)
         
+    }
+}
+
+extension ShowsViewController: UITableViewDataSource{
+    // MARK: - Table Functions
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = data[indexPath.row]
+        return cell
     }
 }

@@ -9,41 +9,7 @@
 import Alamofire
 import MBProgressHUD
 import UIKit
-class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    // MARK: Table Functions
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 450
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as? ShowInfoTableViewCell
-            else{
-                print("Something Went Wrong")
-                return UITableViewCell()
-            }
-            cell.showTitle.text = self.show.title
-            cell.showDescription.text = self.show.description
-            cell.reviewDetails.text = String(data.count) + " REVIEWS, " + String(getRatingAverage()) + " AVERAGE"
-            cell.ratingView.rating = Int(self.getRatingAverage())
-            return cell
-        }
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto2", for: indexPath) as? ReviewTableViewCell
-        else{
-            return UITableViewCell()
-        }
-        let review = data[indexPath.row]
-        cell.reviewComment.text = review.comment
-        cell.userEmail.text = review.user.email
-        cell.ratingView.rating = Int(review.rating!)
-        return cell
-    }
+class DetailsViewController: UIViewController {
     
     // MARK: Properties
     
@@ -115,6 +81,41 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         WriteReviewViewController.authInfo = self.authInfo
         let navigationController = UINavigationController(rootViewController: WriteReviewViewController)
         present(navigationController, animated: true)
+    }
+    
+}
+extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 450
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as? ShowInfoTableViewCell
+            else{
+                print("Something Went Wrong")
+                return UITableViewCell()
+            }
+            cell.showTitle.text = self.show.title
+            cell.showDescription.text = self.show.description
+            cell.reviewDetails.text = String(data.count) + " REVIEWS, " + String(getRatingAverage()) + " AVERAGE"
+            cell.ratingView.rating = Int(self.getRatingAverage())
+            return cell
+        }
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto2", for: indexPath) as? ReviewTableViewCell
+        else{
+            return UITableViewCell()
+        }
+        let review = data[indexPath.row]
+        cell.reviewComment.text = review.comment
+        cell.userEmail.text = review.user.email
+        cell.ratingView.rating = Int(review.rating!)
+        return cell
     }
     
 }
