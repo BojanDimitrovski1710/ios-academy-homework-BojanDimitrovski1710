@@ -20,6 +20,51 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dto-QH-Xhc">
                                 <rect key="frame" x="20" y="44" width="374" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="proto1" rowHeight="200" id="OVu-mL-E5n" customClass="ShowsTableViewCell" customModule="TV_Shows" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OVu-mL-E5n" id="xlT-Fs-zW8">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eCO-dV-RXc">
+                                                    <rect key="frame" x="10" y="10" width="100" height="180"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="150" id="JrZ-P4-mq2"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Oa6-Xi-KbB"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShowName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWd-Yo-VKg">
+                                                    <rect key="frame" x="130" y="81" width="188" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="204" id="qPe-2T-Akk"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RWd-Yo-VKg" firstAttribute="leading" secondItem="eCO-dV-RXc" secondAttribute="trailing" constant="20" id="Hid-Kj-BuI"/>
+                                                <constraint firstItem="RWd-Yo-VKg" firstAttribute="leading" secondItem="eCO-dV-RXc" secondAttribute="trailing" constant="20" id="N0Z-Me-Vy1"/>
+                                                <constraint firstItem="eCO-dV-RXc" firstAttribute="centerY" secondItem="RWd-Yo-VKg" secondAttribute="centerY" id="Szv-3k-bn0"/>
+                                                <constraint firstItem="eCO-dV-RXc" firstAttribute="leading" secondItem="xlT-Fs-zW8" secondAttribute="leading" constant="10" id="ThK-hP-H3z"/>
+                                                <constraint firstItem="eCO-dV-RXc" firstAttribute="top" secondItem="xlT-Fs-zW8" secondAttribute="top" constant="10" id="US5-ws-F55"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RWd-Yo-VKg" secondAttribute="bottom" constant="70" id="Wqe-az-6LI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="RWd-Yo-VKg" secondAttribute="trailing" constant="36" id="bS9-16-hYp"/>
+                                                <constraint firstAttribute="bottom" secondItem="eCO-dV-RXc" secondAttribute="bottom" constant="10" id="bvP-ys-J84"/>
+                                                <constraint firstItem="RWd-Yo-VKg" firstAttribute="top" secondItem="xlT-Fs-zW8" secondAttribute="topMargin" constant="70" id="cMj-GS-Bvb"/>
+                                                <constraint firstItem="eCO-dV-RXc" firstAttribute="centerY" secondItem="xlT-Fs-zW8" secondAttribute="centerY" id="mGx-db-ide"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="proto1"/>
+                                        <connections>
+                                            <outlet property="showImage" destination="eCO-dV-RXc" id="zM7-RI-WLW"/>
+                                            <outlet property="showName" destination="RWd-Yo-VKg" id="oKu-DM-qPR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -37,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="104"/>
+            <point key="canvasLocation" x="37.681159420289859" y="103.79464285714285"/>
         </scene>
     </scenes>
     <resources>

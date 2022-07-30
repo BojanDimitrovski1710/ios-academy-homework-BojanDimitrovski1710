@@ -8,14 +8,14 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+import Kingfisher
 final class ShowsViewController: UIViewController {
     
     // MARK: - Properties
     
     public var user: User!
     public var authInfo: AuthInfo!
-    var data: [String] = []
-    private var shows: [Show]!
+    var data: [Show] = []
     
     // MARK: - Outlets
 
@@ -44,9 +44,8 @@ final class ShowsViewController: UIViewController {
             switch dataResponse.result{
             case .success(let ShowResponse):
                 let shows = ShowResponse.shows
-                self.shows = shows
                 for show in shows{
-                    self.data.append(show.title)
+                    self.data.append(show)
                     self.tableView.reloadData()
                 }
                 break
@@ -70,7 +69,7 @@ extension ShowsViewController: UITableViewDelegate{
         let DetailsViewController = NewStoryboard.instantiateViewController(withIdentifier: "Details") as! DetailsViewController
         DetailsViewController.user = user
         DetailsViewController.authInfo = authInfo
-        DetailsViewController.show = shows[indexPath.row]
+        DetailsViewController.show = data[indexPath.row]
         self.navigationController?.pushViewController(DetailsViewController, animated: true)
         
     }
@@ -78,13 +77,24 @@ extension ShowsViewController: UITableViewDelegate{
 
 extension ShowsViewController: UITableViewDataSource{
     // MARK: - Table Functions
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = data[indexPath.row]
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as? ShowsTableViewCell
+        else{
+            print("Something Went Wrong")
+            return UITableViewCell()
+        }
+        cell.showName.text = data[indexPath.row].title
+        let url = URL(string: data[indexPath.row].image_url!)
+        cell.showImage.kf.setImage(with: url)
         return cell
     }
 }

@@ -32,8 +32,6 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.emailField.text = "newEmail@gmail.com"
-        self.passwordField.text = "mistery123"
     }
     
     func setupUI(){
@@ -41,12 +39,22 @@ final class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = CGFloat(cornerRadius)
         self.navigationController?.setToolbarHidden(true, animated: false)
         rememberMeButton.setTitle(" ", for: .normal)
+        
+        let decoder = PropertyListDecoder()
+        if
+            let data = UserDefaults.standard.data(forKey: "loginInfo"),
+            let decodedLoginInfo = try? decoder.decode(LoginInfo.self, from: data)
+        {
+            self.emailField.text = decodedLoginInfo.email
+            self.passwordField.text = decodedLoginInfo.password
+        }
     }
     
-    func clearInfo(){
-        if !rememberUser{
-            emailField.text = nil
-            passwordField.text = nil
+    func remember(){
+        let loginInfo = LoginInfo(email: self.emailField.text!, password: self.passwordField.text!)
+        let encoder = PropertyListEncoder()
+        if let encoded = try? encoder.encode(loginInfo){
+            UserDefaults.standard.set(encoded, forKey: "loginInfo")
         }
     }
     
@@ -84,7 +92,9 @@ final class LoginViewController: UIViewController {
                 switch dataResponse.result {
                 case .success(let userResponse):
                     let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    self.clearInfo()
+                    if self.rememberUser {
+                        self.remember()
+                    }
                     self.handleSuccesfulLogin(for: userResponse.user, headers: headers)
                 case .failure(let error):
                     print("Failure: \(error)")
@@ -118,7 +128,9 @@ final class LoginViewController: UIViewController {
                 switch response.result {
                 case .success(let response):
                     print("Success: \(response)")
-                    self.clearInfo()
+                    if self.rememberUser{
+                        self.remember()
+                    }
                     self.user = response
                     let alert = UIAlertController(title: "Registration Succses", message: "", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))

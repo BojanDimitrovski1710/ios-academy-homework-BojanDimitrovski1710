@@ -23,6 +23,16 @@ struct User: Codable {
     }
 }
 
+struct LoginInfo: Codable{
+    let email: String
+    let password: String
+    
+    enum CodingKeys: String, CodingKey{
+        case email
+        case password
+    }
+}
+
 struct AuthInfo: Codable {
 
     let accessToken: String

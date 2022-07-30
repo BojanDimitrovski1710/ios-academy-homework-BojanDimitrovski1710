@@ -13,6 +13,7 @@ class WriteReviewViewController: UIViewController {
 
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var commentField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
     
     public var show: Show!
     public var user: User!
@@ -23,6 +24,8 @@ class WriteReviewViewController: UIViewController {
         super.viewDidLoad()
         setUpNav()
         ratingView.delegate = self
+        self.submitButton.isEnabled = false
+        self.commentField.isEnabled = false
     }
     
     @objc func dismissReview(){
@@ -33,6 +36,18 @@ class WriteReviewViewController: UIViewController {
         self.navigationItem.title = "Write a Review"
         let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissReview))
         self.navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    func animateButton(){
+        UIView.animate(withDuration: 0.6,
+            animations: {
+            self.submitButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            },
+            completion: { _ in
+                UIView.animate(withDuration: 0.6) {
+                    self.submitButton.transform = CGAffineTransform.identity
+                }
+            })
     }
     
     @IBAction func submitReview(_ sender: Any) {
@@ -73,6 +88,9 @@ class WriteReviewViewController: UIViewController {
 
 extension WriteReviewViewController: RatingViewDelegate{
     func didChangeRating(_ rating: Int) {
+        self.submitButton.isEnabled = true
+        self.commentField.isEnabled = true
+        animateButton()
         self.rating = rating
     }
     

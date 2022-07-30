@@ -105,6 +105,8 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             cell.showDescription.text = self.show.description
             cell.reviewDetails.text = String(data.count) + " REVIEWS, " + String(getRatingAverage()) + " AVERAGE"
             cell.ratingView.rating = Int(self.getRatingAverage())
+            let imageUrl = URL(string: self.show.image_url!)
+            cell.showImage.kf.setImage(with: imageUrl)
             return cell
         }
         guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto2", for: indexPath) as? ReviewTableViewCell

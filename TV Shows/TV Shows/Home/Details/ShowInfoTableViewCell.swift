@@ -14,15 +14,15 @@ class ShowInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var showDescription: UILabel!
     @IBOutlet weak var reviewDetails: UILabel!
-    
+    @IBOutlet weak var showImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        ratingView.configure(withStyle: .large)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        ratingView.configure(withStyle: .large)
         // Configure the view for the selected state
     }
 
