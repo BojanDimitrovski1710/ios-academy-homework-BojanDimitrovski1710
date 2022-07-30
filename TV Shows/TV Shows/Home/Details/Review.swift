@@ -11,6 +11,20 @@ struct ReviewsResponse: Codable{
     let reviews: [Review]
 }
 
+struct ReviewResponse: Codable{
+    let id: String
+    let comment: String
+    let rating: Int
+    let show_id: Int
+    let user: User
+}
+
+struct ReviewRequest: Codable{
+    let rating: Int
+    let comment: String
+    let show_id: Int
+}
+
 struct Review: Codable{
     let rating: Double?
     let comment: String

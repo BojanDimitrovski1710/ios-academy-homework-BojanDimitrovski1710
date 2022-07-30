@@ -36,17 +36,12 @@ final class ShowsViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         getShows()
-    }
-    
-    func setupUI(){
-        //self.navigationController!.setNavigationBarHidden(true, animated: true)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func getShows(){
-        tableView.dataSource = self
-        tableView.delegate = self
         MBProgressHUD.showAdded(to: self.view, animated: true)
         AF.request(
             "https://tv-shows.infinum.academy/shows",

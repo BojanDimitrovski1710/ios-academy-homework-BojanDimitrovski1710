@@ -64,8 +64,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rU-VZ-CrW" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="391" width="300" height="40"/>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7rU-VZ-CrW" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="390" width="300" height="40"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                             </subviews>
@@ -90,6 +90,7 @@
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" identifier="proto1"/>
                                         <connections>
+                                            <outlet property="ratingView" destination="7rU-VZ-CrW" id="A78-kv-Exg"/>
                                             <outlet property="reviewDetails" destination="bch-VH-4ew" id="Tay-eh-Lh9"/>
                                             <outlet property="showDescription" destination="yZe-2F-oJj" id="JDE-Ce-jIi"/>
                                             <outlet property="showTitle" destination="feu-i3-SeY" id="bfb-Sd-rVs"/>

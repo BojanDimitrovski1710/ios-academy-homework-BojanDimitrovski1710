@@ -146,7 +146,7 @@ private extension RatingView {
             }
             index+=1
         }
-        return rating
+        return rating+1
     }
 }
 

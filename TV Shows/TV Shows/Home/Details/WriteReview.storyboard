@@ -57,6 +57,9 @@
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <color key="baseBackgroundColor" red="0.37254901959999998" green="0.24507015770000001" blue="0.64343760370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="submitReview:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0nf-KS-GDl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -83,6 +86,7 @@
                     </view>
                     <connections>
                         <outlet property="commentField" destination="B01-2A-4pD" id="ZlU-u8-AdZ"/>
+                        <outlet property="ratingView" destination="jKA-46-HjI" id="b9G-Mx-daI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

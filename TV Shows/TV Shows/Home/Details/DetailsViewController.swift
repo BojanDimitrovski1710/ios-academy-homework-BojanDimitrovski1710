@@ -31,6 +31,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.showTitle.text = self.show.title
             cell.showDescription.text = self.show.description
             cell.reviewDetails.text = String(data.count) + " REVIEWS, " + String(getRatingAverage()) + " AVERAGE"
+            cell.ratingView.rating = Int(self.getRatingAverage())
             return cell
         }
         guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto2", for: indexPath) as? ReviewTableViewCell
@@ -40,6 +41,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         let review = data[indexPath.row]
         cell.reviewComment.text = review.comment
         cell.userEmail.text = review.user.email
+        cell.ratingView.rating = Int(review.rating!)
         return cell
     }
     
@@ -58,12 +60,12 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        getShowInfo()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
+
+    override func viewWillAppear (_ animated: Bool) {
+        setupUI()
+        tableView.dataSource = self
+        getShowInfo()
     }
     
     func getRatingAverage() -> Double{
@@ -80,7 +82,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func getShowInfo(){
-        tableView.dataSource = self
+        self.data = []
         AF.request(
             "https://tv-shows.infinum.academy/shows/" + show.id + "/reviews",
             method: .get,

@@ -14,7 +14,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingView: RatingView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        ratingView.configure(withStyle: .small)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

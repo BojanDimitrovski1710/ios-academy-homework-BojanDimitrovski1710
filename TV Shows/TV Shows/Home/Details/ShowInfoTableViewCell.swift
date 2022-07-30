@@ -11,9 +11,10 @@ class ShowInfoTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var showTitle: UILabel!
-    
+    @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var showDescription: UILabel!
     @IBOutlet weak var reviewDetails: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,7 +22,7 @@ class ShowInfoTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        ratingView.configure(withStyle: .large)
         // Configure the view for the selected state
     }
 
