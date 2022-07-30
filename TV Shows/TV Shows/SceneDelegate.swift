@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import MBProgressHUD
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +19,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        let navigationController = UINavigationController()
+        let decoder = PropertyListDecoder()
+        let data = UserDefaults.standard.data(forKey: "AuthInfo")
+        let userData = UserDefaults.standard.data(forKey: "User")
+        if data != nil && userData != nil{
+            let authInfo = try? decoder.decode(AuthInfo.self, from: data!)
+            
+            let user = try? decoder.decode(User.self, from: userData!)
+            let storyboard = UIStoryboard(name: "Shows", bundle: nil)
+            let showsViewController = storyboard.instantiateViewController(withIdentifier: "ShowsViewController") as! ShowsViewController
+            showsViewController.authInfo = authInfo
+            showsViewController.user = user
+            navigationController.setViewControllers([showsViewController], animated: false)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            navigationController.setViewControllers([loginViewController], animated: false)
+        }
+        window?.rootViewController = navigationController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -16,7 +16,7 @@ final class LoginViewController: UIViewController {
     
     private var counter: Int = 0
     private var cornerRadius: Int = 75
-    private var user: UserResponse? = nil
+    private var userResponse: UserResponse? = nil
     private var rememberUser = false
     
     // MARK: - Outlets
@@ -39,24 +39,30 @@ final class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = CGFloat(cornerRadius)
         self.navigationController?.setToolbarHidden(true, animated: false)
         rememberMeButton.setTitle(" ", for: .normal)
-        
-        let decoder = PropertyListDecoder()
-        if
-            let data = UserDefaults.standard.data(forKey: "loginInfo"),
-            let decodedLoginInfo = try? decoder.decode(LoginInfo.self, from: data)
-        {
-            self.emailField.text = decodedLoginInfo.email
-            self.passwordField.text = decodedLoginInfo.password
+    }
+    
+    func remember(AuthInfo: AuthInfo, User: User){
+        let encoder = PropertyListEncoder()
+        if let encoded = try? encoder.encode(AuthInfo){
+           UserDefaults.standard.set(encoded, forKey: "AuthInfo")
+        }
+        if let encoded2 = try? encoder.encode(User){
+            UserDefaults.standard.set(encoded2, forKey: "User")
         }
     }
     
-    func remember(){
-        let loginInfo = LoginInfo(email: self.emailField.text!, password: self.passwordField.text!)
-        let encoder = PropertyListEncoder()
-        if let encoded = try? encoder.encode(loginInfo){
-            UserDefaults.standard.set(encoded, forKey: "loginInfo")
-        }
+    func shakeField(field: UITextField){
+        let animation =  CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: field.center.x - 5, y: field.center.y - 5 ))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: field.center.x + 5, y: field.center.y + 5 ))
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor(red: 100, green: 0, blue: 0, alpha: 1).cgColor
+        field.layer.add(animation, forKey: "position")
     }
+    
     
     // MARK: - Actions
     
@@ -70,6 +76,16 @@ final class LoginViewController: UIViewController {
         }
         
     }
+    
+    
+    @IBAction func revertEmailToNormal(_ sender: Any) {
+        emailField.layer.borderWidth = 0
+    }
+    
+    @IBAction func revertPasswordToNormal(_ sender: Any){
+        passwordField.layer.borderWidth = 0
+    }
+    
     @IBAction func login(_ sender: Any) {
         if !emailField.text!.isEmpty && !passwordField.text!.isEmpty{
             MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -90,19 +106,30 @@ final class LoginViewController: UIViewController {
                 guard let self = self else { return }
                 MBProgressHUD.hide(for: self.view, animated: true)
                 switch dataResponse.result {
-                case .success(let userResponse):
+                case .success(let response):
+                    self.userResponse = response
                     let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    if self.rememberUser {
-                        self.remember()
-                    }
-                    self.handleSuccesfulLogin(for: userResponse.user, headers: headers)
+                    self.handleSuccesfulLogin(for: response.user, headers: headers)
                 case .failure(let error):
                     print("Failure: \(error)")
-                    let alert = UIAlertController(title: "Invalid Login", message: "Try Again", preferredStyle: UIAlertController.Style.alert)
+                    self.shakeField(field: self.emailField)
+                    self.shakeField(field: self.passwordField)
+                    let alert = UIAlertController(title: "Invalid Login", message: "Invalid Credentials", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
                     self.present(alert, animated: true, completion: nil)
+                     
                 }
             }
+        }else{
+            if emailField.text!.isEmpty{
+                self.shakeField(field: emailField)
+            }
+            if passwordField.text!.isEmpty{
+                self.shakeField(field: passwordField)
+            }
+            let alert = UIAlertController(title: "Invalid Login", message: "All fields must be filled in", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -128,20 +155,29 @@ final class LoginViewController: UIViewController {
                 switch response.result {
                 case .success(let response):
                     print("Success: \(response)")
-                    if self.rememberUser{
-                        self.remember()
-                    }
-                    self.user = response
+                    self.userResponse = response
                     let alert = UIAlertController(title: "Registration Succses", message: "", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
                     self.present(alert, animated: true, completion: nil)
                 case .failure(let error):
                     print("Failure: \(error)")
-                    let alert = UIAlertController(title: "Invalid Registration", message: "Try Again", preferredStyle: UIAlertController.Style.alert)
+                    self.shakeField(field: self.emailField)
+                    self.shakeField(field: self.passwordField)
+                    let alert = UIAlertController(title: "Invalid Registration", message: "Invalid Credentials", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
                     self.present(alert, animated: true, completion: nil)
                 }
             }
+        }else{
+            if emailField.text!.isEmpty{
+                self.shakeField(field: emailField)
+            }
+            if passwordField.text!.isEmpty{
+                self.shakeField(field: passwordField)
+            }
+            let alert = UIAlertController(title: "Invalid Registration", message: "All fields must be filled in", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -149,6 +185,9 @@ final class LoginViewController: UIViewController {
         guard let authInfo = try? AuthInfo(headers: headers) else{
             infoLabel.text = "Missing Headers"
             return
+        }
+        if self.rememberUser{
+            self.remember(AuthInfo: authInfo, User: self.userResponse!.user)
         }
         infoLabel.text = "\(user)\n\n\(authInfo)"
         let NewStoryboard = UIStoryboard(name: "Shows", bundle: nil)
