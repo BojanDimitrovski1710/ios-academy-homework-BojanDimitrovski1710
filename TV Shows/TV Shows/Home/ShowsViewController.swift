@@ -28,6 +28,21 @@ final class ShowsViewController: UIViewController {
         getShows()
         tableView.dataSource = self
         tableView.delegate = self
+        let profileDetailsItem = UIBarButtonItem(
+                  image: UIImage(named: "ic-profile"),
+                  style: .plain,
+                  target: self,
+                  action: #selector(profileDetailsActionHandler)
+                )
+        //profileDetailsItem.tintColor = UIColor.magenta
+        navigationItem.rightBarButtonItem = profileDetailsItem
+    }
+    
+    @objc func profileDetailsActionHandler(){
+        let NewStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let ProfileViewController = NewStoryboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+        let navigationController = UINavigationController(rootViewController: ProfileViewController)
+        present(navigationController, animated: true)
     }
     
     func getShows(){
@@ -87,14 +102,14 @@ extension ShowsViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as? ShowsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as? ShowsTableViewCell
         else{
             print("Something Went Wrong")
             return UITableViewCell()
         }
         cell.showName.text = data[indexPath.row].title
         let url = URL(string: data[indexPath.row].image_url!)
-        cell.showImage.kf.setImage(with: url)
+        cell.showImage.kf.setImage(with: url, placeholder: UIImage(named: "ic-show-placeholder-vertical"))
         return cell
     }
 }

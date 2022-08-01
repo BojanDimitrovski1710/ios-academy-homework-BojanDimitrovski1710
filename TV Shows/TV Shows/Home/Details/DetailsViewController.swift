@@ -9,7 +9,7 @@
 import Alamofire
 import MBProgressHUD
 import UIKit
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
     
     // MARK: Properties
     
