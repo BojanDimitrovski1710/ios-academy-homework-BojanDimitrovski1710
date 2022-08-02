@@ -36,8 +36,9 @@ final class ShowsViewController: UIViewController {
                   target: self,
                   action: #selector(profileDetailsActionHandler)
                 )
-        //profileDetailsItem.tintColor = UIColor.magenta
+        profileDetailsItem.tintColor = UIColor.purple
         navigationItem.rightBarButtonItem = profileDetailsItem
+        self.navigationItem.title = "Shows"
     }
     
     func setupNotifications(){

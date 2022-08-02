@@ -64,6 +64,9 @@ final class ProfileViewController: UIViewController{
     
     @IBAction func changeUserImage(_ sender: Any) {
         // TODO: Implement change image
+        let newStoryboard = UIStoryboard(name: "AddProfilePhoto", bundle: nil)
+        let AddProfilePhotoViewController = newStoryboard.instantiateViewController(withIdentifier: "AddProfilePhoto") as! AddProfileViewController
+        present(AddProfilePhotoViewController, animated: true)
     }
     
     @IBAction func logOut(_ sender: Any) {

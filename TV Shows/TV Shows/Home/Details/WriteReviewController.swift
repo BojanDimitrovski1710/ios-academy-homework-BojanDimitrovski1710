@@ -39,9 +39,9 @@ class WriteReviewViewController: UIViewController {
     }
     
     func animateButton(){
-        UIView.animate(withDuration: 0.6,
+        UIView.animate(withDuration: 0.2,
             animations: {
-            self.submitButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.submitButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             },
             completion: { _ in
                 UIView.animate(withDuration: 0.6) {
@@ -88,9 +88,11 @@ class WriteReviewViewController: UIViewController {
 
 extension WriteReviewViewController: RatingViewDelegate{
     func didChangeRating(_ rating: Int) {
-        self.submitButton.isEnabled = true
-        self.commentField.isEnabled = true
-        animateButton()
+        if submitButton.isEnabled == false{
+            animateButton()
+            self.submitButton.isEnabled = true
+            self.commentField.isEnabled = true
+        }
         self.rating = rating
     }
     
