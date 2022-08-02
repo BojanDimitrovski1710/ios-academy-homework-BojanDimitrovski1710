@@ -36,9 +36,7 @@ final class ProfileViewController: UIViewController{
     }
     
     func getUser(){
-        let decoder = PropertyListDecoder()
-        let data = UserDefaults.standard.data(forKey: "AuthInfo")
-        self.authInfo = try? decoder.decode(AuthInfo.self, from: data!)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         AF.request(
             "https://tv-shows.infinum.academy/users/me",
             method: .get,
@@ -63,11 +61,23 @@ final class ProfileViewController: UIViewController{
         }
     }
     
+    
     @IBAction func changeUserImage(_ sender: Any) {
         // TODO: Implement change image
     }
     
     @IBAction func logOut(_ sender: Any) {
-        // TODO: Implement log out
+        dismiss(animated: true) {
+            let decoder = PropertyListDecoder()
+            let data = UserDefaults.standard.data(forKey: "AuthInfo")
+            if data != nil{
+                UserDefaults.standard.removeObject(forKey: "AuthInfo")
+                UserDefaults.standard.removeObject(forKey: "User")
+            }
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "didLogout"), object: nil)
+
+            // TODO: Implement log out
+            
+        }
     }
 }

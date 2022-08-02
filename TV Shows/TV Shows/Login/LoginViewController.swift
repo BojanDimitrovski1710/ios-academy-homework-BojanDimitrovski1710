@@ -189,7 +189,6 @@ final class LoginViewController: UIViewController {
         if self.rememberUser{
             self.remember(AuthInfo: authInfo, User: self.userResponse!.user)
         }
-        infoLabel.text = "\(user)\n\n\(authInfo)"
         let NewStoryboard = UIStoryboard(name: "Shows", bundle: nil)
         let ShowsViewController = NewStoryboard.instantiateViewController(withIdentifier: "ShowsViewController") as! ShowsViewController
         

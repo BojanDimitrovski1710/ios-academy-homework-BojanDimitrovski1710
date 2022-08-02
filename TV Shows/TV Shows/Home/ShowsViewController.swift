@@ -16,6 +16,7 @@ final class ShowsViewController: UIViewController {
     public var user: User!
     public var authInfo: AuthInfo!
     var data: [Show] = []
+    private var notificationToken: NSObjectProtocol?
     
     // MARK: - Outlets
 
@@ -25,6 +26,7 @@ final class ShowsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotifications()
         getShows()
         tableView.dataSource = self
         tableView.delegate = self
@@ -38,10 +40,22 @@ final class ShowsViewController: UIViewController {
         navigationItem.rightBarButtonItem = profileDetailsItem
     }
     
+    func setupNotifications(){
+        NotificationCenter
+            .default
+            .addObserver(forName: Notification.Name(rawValue: "didLogout"), object: nil, queue: nil) { notification in
+                let newStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                let loginViewController = newStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.setViewControllers(
+                    [loginViewController], animated: true)
+            }
+    }
+    
     @objc func profileDetailsActionHandler(){
         let NewStoryboard = UIStoryboard(name: "Profile", bundle: nil)
         let ProfileViewController = NewStoryboard.instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
         let navigationController = UINavigationController(rootViewController: ProfileViewController)
+        ProfileViewController.authInfo = self.authInfo
         present(navigationController, animated: true)
     }
     
