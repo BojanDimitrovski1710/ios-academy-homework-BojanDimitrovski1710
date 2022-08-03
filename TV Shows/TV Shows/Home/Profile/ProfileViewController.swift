@@ -75,7 +75,8 @@ final class ProfileViewController: UIViewController{
         let newStoryboard = UIStoryboard(name: "AddProfilePhoto", bundle: nil)
         let AddProfilePhotoViewController = newStoryboard.instantiateViewController(withIdentifier: "AddProfilePhoto") as! AddProfileViewController
         AddProfilePhotoViewController.authInfo = self.authInfo
-        present(AddProfilePhotoViewController, animated: true)
+        let navController = UINavigationController(rootViewController: AddProfilePhotoViewController)
+        present(navController, animated: true)
     }
     
     @IBAction func logOut(_ sender: Any) {

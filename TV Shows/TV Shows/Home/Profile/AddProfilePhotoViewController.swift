@@ -28,7 +28,7 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
     }
     
     func setupNav(){
-        self.navigationItem.title = "My Profile"
+        self.navigationItem.title = "Change Profile Photo"
         let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissProfileImagePicker))
         self.navigationItem.leftBarButtonItem = leftButton
     }
