@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 final class LoginViewController: UIViewController {
-    
+
     // MARK: - Properties
     
     private var counter: Int = 0
@@ -75,8 +75,7 @@ final class LoginViewController: UIViewController {
             rememberUser = false
         }
         
-    }
-    
+    }    
     
     @IBAction func revertEmailToNormal(_ sender: Any) {
         emailField.layer.borderWidth = 0
