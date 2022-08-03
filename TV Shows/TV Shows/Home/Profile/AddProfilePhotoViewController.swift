@@ -27,6 +27,12 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
         
     }
     
+    func setupNav(){
+        self.navigationItem.title = "My Profile"
+        let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissProfileImagePicker))
+        self.navigationItem.leftBarButtonItem = leftButton
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
@@ -44,11 +50,7 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
         pickImageButton.layer.cornerRadius = CGFloat(cornerRadius)
     }
     
-    func setupNav(){
-        self.navigationItem.title = "My Profile"
-        let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissProfileImagePicker))
-        self.navigationItem.leftBarButtonItem = leftButton
-    }
+    
     
     func shakeButton(button: UIButton){
         let animation =  CABasicAnimation(keyPath: "position")
