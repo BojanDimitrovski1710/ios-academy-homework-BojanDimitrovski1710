@@ -7,9 +7,12 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import MBProgressHUD
 final class AddProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
     let imagePicker = UIImagePickerController()
+    public var authInfo: AuthInfo!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var submitImageButton: UIButton!
@@ -19,6 +22,8 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
+        setupNav()
+        setupUI()
         
     }
     
@@ -26,9 +31,7 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        setupNav()
-        setupUI()
-        pickImage()
+        //pickImage()
     }
     
     func pickImage(){
@@ -45,6 +48,19 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
         self.navigationItem.title = "My Profile"
         let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissProfileImagePicker))
         self.navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    func shakeButton(button: UIButton){
+        let animation =  CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: button.center.x - 5, y: button.center.y - 5 ))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: button.center.x + 5, y: button.center.y + 5 ))
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 0
+        button.layer.borderColor = UIColor(red: 100, green: 0, blue: 0, alpha: 1).cgColor
+        button.layer.add(animation, forKey: "position")
     }
     
     @objc func dismissProfileImagePicker(){
@@ -66,9 +82,43 @@ final class AddProfileViewController: UIViewController, UIImagePickerControllerD
     
     @IBAction func submitImage(_ sender: Any) {
         
+        if self.imageView.image == nil {
+            self.shakeButton(button: self.pickImageButton)
+            let alert = UIAlertController(title: "Invalid Submisson", message: "Please choose a picture before submitting", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            guard let imageData = self.imageView.image!.jpegData(compressionQuality: 0.9)
+                else { return }
+
+                let requestData = MultipartFormData()
+                requestData.append(
+                    imageData,
+                    withName: "image",
+                    fileName: "image.jpg",
+                    mimeType: "image/jpg"
+                )
+
+                AF
+                    .upload(
+                        multipartFormData: requestData,
+                        to: "https://tv-shows.infinum.academy/users", method: .put,
+                        headers: HTTPHeaders(authInfo.headers)
+                    )
+                    .validate()
+                    .responseDecodable(of: UserResponse.self) { dataResponse in
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "didChangeImage"), object: nil)
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        self.dismissProfileImagePicker()
+                    }
+        }
+        
     }
     
     @IBAction func pickImageButtonClicked(_ sender: Any) {
+        self.pickImageButton.layer.borderWidth = 0
         pickImage()
     }
 }

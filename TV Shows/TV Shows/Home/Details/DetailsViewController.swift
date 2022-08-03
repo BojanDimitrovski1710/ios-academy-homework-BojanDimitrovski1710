@@ -117,6 +117,8 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
         cell.reviewComment.text = review.comment
         cell.userEmail.text = review.user.email
         cell.ratingView.rating = Int(review.rating!)
+        let imageUrl = URL(string: review.user.imageUrl ?? "")
+        cell.userImage.kf.setImage(with: imageUrl, placeholder: UIImage(named: "ic-profile-placeholder"))
         return cell
     }
     

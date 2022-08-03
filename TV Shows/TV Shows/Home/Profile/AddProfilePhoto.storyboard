@@ -34,7 +34,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gy2-l9-cWk">
                                 <rect key="frame" x="20" y="692" width="374" height="60"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Pick Image">
+                                <buttonConfiguration key="configuration" style="filled" title="Choose Image">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                     <color key="baseBackgroundColor" red="0.32156862745098036" green="0.21176470588235294" blue="0.5490196078431373" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>

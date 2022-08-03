@@ -12,6 +12,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var reviewComment: UILabel!
     @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet weak var userImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

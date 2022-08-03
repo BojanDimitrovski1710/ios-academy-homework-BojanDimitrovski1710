@@ -153,6 +153,7 @@
                                             <outlet property="ratingView" destination="8uz-5c-kD3" id="03e-kx-kTS"/>
                                             <outlet property="reviewComment" destination="jWM-c8-J4V" id="Beh-gF-KpV"/>
                                             <outlet property="userEmail" destination="usO-oW-nq3" id="15G-w6-Taa"/>
+                                            <outlet property="userImage" destination="Ukk-ik-Cyu" id="IW4-0E-Fku"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

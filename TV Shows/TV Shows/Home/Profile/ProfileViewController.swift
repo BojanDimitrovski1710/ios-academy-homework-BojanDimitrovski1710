@@ -22,14 +22,15 @@ final class ProfileViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         getUser()
-        setUpNav()
+        setupNav()
+        setupNotifications()
     }
     
     @objc func dismissProfile(){
         dismiss(animated: true)
     }
     
-    func setUpNav(){
+    func setupNav(){
         self.navigationItem.title = "My Account"
         let leftButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.dismissProfile))
         self.navigationItem.leftBarButtonItem = leftButton
@@ -61,11 +62,19 @@ final class ProfileViewController: UIViewController{
         }
     }
     
+    func setupNotifications(){
+        NotificationCenter
+            .default
+            .addObserver(forName: Notification.Name(rawValue: "didChangeImage"), object: nil, queue: nil) { notification in
+                self.getUser()
+            }
+    }
     
     @IBAction func changeUserImage(_ sender: Any) {
         // TODO: Implement change image
         let newStoryboard = UIStoryboard(name: "AddProfilePhoto", bundle: nil)
         let AddProfilePhotoViewController = newStoryboard.instantiateViewController(withIdentifier: "AddProfilePhoto") as! AddProfileViewController
+        AddProfilePhotoViewController.authInfo = self.authInfo
         present(AddProfilePhotoViewController, animated: true)
     }
     
